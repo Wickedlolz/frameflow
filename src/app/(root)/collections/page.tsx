@@ -178,7 +178,7 @@ export default function CollectionsPage() {
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.5 }}
                             >
-                                <Link href={`/collection/${collection.id}`}>
+                                <Link href={`/collections/${collection.id}`}>
                                     <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                                         <div className="relative h-48">
                                             <Image
