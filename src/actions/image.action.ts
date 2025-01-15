@@ -5,6 +5,7 @@ import {
     IImagePreview,
     ISearchImageResponse,
 } from '@/interfaces/image';
+import { ICollection, CollectionResponse } from '@/interfaces/collection';
 
 const unsplashBaseUrl = process.env.NEXT_PUBLIC_UNSPLASH_BASE_URL;
 const unsplashAccessKey = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
@@ -92,4 +93,37 @@ export async function fetchPhotos({
 
 export async function getImageById(id: string) {
     return requester<IImagePreview>(`/photos/${id}`);
+}
+
+export async function fetchCollections({
+    query,
+    page = 1,
+    perPage = 12,
+}: RequestParams): Promise<ICollection[]> {
+    const endpoint = query ? '/search/collections' : '/collections';
+    const data = await requester<
+        typeof query extends string ? CollectionResponse : ICollection[]
+    >(endpoint, { query, page, perPage });
+
+    return query
+        ? (data as unknown as CollectionResponse).results
+        : (data as ICollection[]);
+}
+
+export async function fetchPaginatedCollections(
+    pageParam = 1,
+    searchQuery?: string
+): Promise<ICollection[]> {
+    const endpoint = searchQuery ? '/search/collections' : '/collections';
+    const data = await requester<
+        typeof searchQuery extends string ? CollectionResponse : ICollection[]
+    >(endpoint, {
+        query: searchQuery,
+        page: pageParam,
+        perPage: 12,
+    });
+
+    return searchQuery
+        ? (data as unknown as CollectionResponse).results
+        : (data as ICollection[]);
 }
