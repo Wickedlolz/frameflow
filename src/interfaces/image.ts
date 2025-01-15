@@ -89,6 +89,10 @@ export interface IImage {
     };
 }
 
+export interface ISearchImageResponse {
+    results: IImage[];
+}
+
 export interface IImagePreview {
     id: string;
     slug: string;

@@ -1,6 +1,7 @@
-'use client';
+// 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -11,19 +12,19 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Menu, Moon, Sun } from 'lucide-react';
+import SignOutButton from './SignOutButton';
 
-export default function Header() {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-    const user = {
-        name: 'John Doe',
-        avatar: 'https://via.placeholder.com/150',
-    };
+export default async function Header() {
+    const supabase = createServerComponentClient({ cookies });
 
-    const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
-        // Add logic here to actually change the theme
-    };
+    const {
+        data: { session },
+    } = await supabase.auth.getSession();
+    const isDarkMode = false;
+    // const toggleTheme = () => {
+    //     setIsDarkMode(!isDarkMode);
+    //     // Add logic here to actually change the theme
+    // };
 
     return (
         <header className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-lg">
@@ -74,7 +75,7 @@ export default function Header() {
                             variant="ghost"
                             size="sm"
                             className="rounded-full text-white hover:text-gray-200 hover:bg-white/10"
-                            onClick={toggleTheme}
+                            // onClick={toggleTheme}
                         >
                             {isDarkMode ? (
                                 <Sun size={20} />
@@ -83,25 +84,38 @@ export default function Header() {
                             )}
                         </Button>
 
-                        {!isLoggedIn ? (
-                            <Button
-                                onClick={() => setIsLoggedIn(true)}
-                                variant="outline"
-                                size="sm"
-                                className="rounded-full border-white text-black hover:bg-white hover:text-purple-600"
-                            >
-                                Login
-                            </Button>
+                        {!session ? (
+                            <div className="flex items-center space-x-4">
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="text-white hover:text-gray-200 hover:bg-white/10"
+                                    asChild
+                                >
+                                    <Link href="/login">Login</Link>
+                                </Button>
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="border-white text-black hover:bg-white hover:text-purple-600"
+                                    asChild
+                                >
+                                    <Link href="/signup">Sign Up</Link>
+                                </Button>
+                            </div>
                         ) : (
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Avatar className="cursor-pointer">
                                         <AvatarImage
-                                            src={user.avatar}
-                                            alt={user.name}
+                                            src={''}
+                                            alt={session?.user?.email}
                                         />
                                         <AvatarFallback>
-                                            {user.name[0]}
+                                            {session?.user?.email
+                                                ?.split('')[0]
+                                                .charAt(0)
+                                                .toLocaleUpperCase()}
                                         </AvatarFallback>
                                     </Avatar>
                                 </DropdownMenuTrigger>
@@ -115,11 +129,7 @@ export default function Header() {
                                     <DropdownMenuItem asChild>
                                         <Link href="/settings">Settings</Link>
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem
-                                        onClick={() => setIsLoggedIn(false)}
-                                    >
-                                        Logout
-                                    </DropdownMenuItem>
+                                    <SignOutButton />
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         )}

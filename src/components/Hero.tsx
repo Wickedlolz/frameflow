@@ -1,25 +1,7 @@
-'use client';
-
-import { useState } from 'react';
+import SearchForm from './forms/SearchForm';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Search } from 'lucide-react';
 
-interface HeroProps {
-    onSearch: (query: string) => void;
-    onCategorySelect: (category: string) => void;
-}
-
-export default function Hero({ onSearch, onCategorySelect }: HeroProps) {
-    const [searchQuery, setSearchQuery] = useState<string>('');
-
-    const handleSearch = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Implement search functionality here
-        console.log('Searching for:', searchQuery);
-        onSearch(searchQuery);
-    };
-
+export default function Hero() {
     return (
         <section className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white py-20">
             <div className="container mx-auto text-center px-4">
@@ -31,31 +13,7 @@ export default function Hero({ onSearch, onCategorySelect }: HeroProps) {
                     inspiration, curate your favorites, and elevate your
                     projects.
                 </p>
-                <form
-                    onSubmit={handleSearch}
-                    className="flex justify-center items-center space-x-2 max-w-2xl mx-auto"
-                >
-                    <div className="relative flex-1">
-                        <Input
-                            type="text"
-                            placeholder="Search for images..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-10 pr-4 py-3 rounded-full bg-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white text-lg placeholder:text-white"
-                        />
-                        <Search
-                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300"
-                            size={24}
-                        />
-                    </div>
-                    <Button
-                        type="submit"
-                        size="lg"
-                        className="rounded-full bg-white text-purple-600 hover:bg-gray-200 px-8"
-                    >
-                        Search
-                    </Button>
-                </form>
+                <SearchForm />
                 <div className="mt-12 flex flex-wrap justify-center gap-4">
                     {['Popular', 'Nature', 'Architecture', 'Travel'].map(
                         (category) => (
@@ -63,9 +21,6 @@ export default function Hero({ onSearch, onCategorySelect }: HeroProps) {
                                 key={category}
                                 variant="outline"
                                 className="rounded-full border-white text-gray-500 hover:bg-white hover:text-purple-600"
-                                onClick={() =>
-                                    onCategorySelect(category.toLowerCase())
-                                }
                             >
                                 {category}
                             </Button>
