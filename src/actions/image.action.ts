@@ -1,6 +1,10 @@
 'use server';
 
-import { IImage, ISearchImageResponse } from '@/interfaces/image';
+import {
+    IImage,
+    IImagePreview,
+    ISearchImageResponse,
+} from '@/interfaces/image';
 
 const unsplashBaseUrl = process.env.NEXT_PUBLIC_UNSPLASH_BASE_URL;
 const unsplashAccessKey = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
@@ -84,4 +88,8 @@ export async function fetchPhotos({
     return query
         ? (data as unknown as ISearchImageResponse).results
         : (data as IImage[]);
+}
+
+export async function getImageById(id: string) {
+    return requester<IImagePreview>(`/photos/${id}`);
 }
