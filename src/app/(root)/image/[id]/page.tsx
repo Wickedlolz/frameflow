@@ -2,16 +2,17 @@ import { getImageById } from '@/actions/image.action';
 import { isImageLiked } from '@/actions/liked-images.action';
 import ImageDetails from '@/components/image/ImageDetails';
 
+type Params = Promise<{ id: string }>;
+
 interface ImagePageProps {
-    params: {
-        id: string;
-    };
+    params: Params;
 }
 
 export default async function ImagePage({ params }: ImagePageProps) {
+    const { id } = await params;
     const [image, isLiked] = await Promise.all([
-        getImageById(params.id),
-        isImageLiked(params.id),
+        getImageById(id),
+        isImageLiked(id),
     ]);
 
     return (
