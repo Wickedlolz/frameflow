@@ -5,6 +5,9 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { fetchPaginatedCollections } from '@/actions/image.action';
+import { ICollection } from '@/interfaces/collection';
+
 import { Grid, Columns } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -14,8 +17,6 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { fetchPaginatedCollections } from '@/actions/image.action';
-import { ICollection } from '@/interfaces/collection';
 
 interface CollectionsGridProps {
     initialData: ICollection[];

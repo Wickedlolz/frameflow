@@ -17,7 +17,7 @@ export default async function CollectionsPage({
     });
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">
+        <section className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">
             <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 py-16 px-4">
                 <div className="container mx-auto max-w-4xl text-center">
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -39,6 +39,6 @@ export default async function CollectionsPage({
                     />
                 </Suspense>
             </div>
-        </div>
+        </section>
     );
 }
