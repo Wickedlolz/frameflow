@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -21,15 +21,24 @@ import {
 import { IImagePreview } from '@/interfaces/image';
 import ImageLightbox from './ImageLightbox';
 import { downloadImage } from '@/utils/download';
+import { toggleLikeImage } from '@/actions/liked-images.action';
+import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
 
 interface ImageDetailsProps {
     image: IImagePreview;
+    initialLikedState?: boolean;
 }
 
-export default function ImageDetails({ image }: ImageDetailsProps) {
+export default function ImageDetails({
+    image,
+    initialLikedState = false,
+}: ImageDetailsProps) {
     const router = useRouter();
-    const [showLightbox, setShowLightbox] = useState(false);
-    const [isDownloading, setIsDownloading] = useState(false);
+    const [showLightbox, setShowLightbox] = useState<boolean>(false);
+    const [isDownloading, setIsDownloading] = useState<boolean>(false);
+    const [isPending, startTransition] = useTransition();
+    const [isLiked, setIsLiked] = useState(initialLikedState);
 
     const handleDownload = async () => {
         try {
@@ -41,6 +50,25 @@ export default function ImageDetails({ image }: ImageDetailsProps) {
         } finally {
             setIsDownloading(false);
         }
+    };
+
+    const handleLike = () => {
+        const newLikedState = !isLiked;
+        setIsLiked(newLikedState); // Optimistic update
+
+        startTransition(async () => {
+            try {
+                const result = await toggleLikeImage(image);
+                if (result.liked !== newLikedState) {
+                    setIsLiked(result.liked); // Revert if server state differs
+                }
+                toast.success(result.liked ? 'Image liked!' : 'Image unliked!');
+            } catch (error) {
+                console.log(error);
+                setIsLiked(!newLikedState); // Revert on error
+                toast.error('Please sign in to like images.');
+            }
+        });
     };
 
     return (
@@ -172,10 +200,27 @@ export default function ImageDetails({ image }: ImageDetailsProps) {
                             <div className="flex space-x-4">
                                 <Button
                                     size="lg"
-                                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+                                    onClick={handleLike}
+                                    disabled={isPending}
+                                    className={cn(
+                                        'flex-1 relative group overflow-hidden transition-all duration-300',
+                                        isLiked
+                                            ? 'bg-pink-600 hover:bg-pink-700'
+                                            : 'bg-blue-600 hover:bg-blue-700',
+                                        'text-white disabled:opacity-50'
+                                    )}
                                 >
-                                    <Heart className="h-5 w-5 mr-2" />
-                                    Like
+                                    <Heart
+                                        className={cn(
+                                            'h-5 w-5 mr-2 transition-transform duration-300',
+                                            isLiked && 'fill-current scale-110'
+                                        )}
+                                    />
+                                    {isPending
+                                        ? 'Processing...'
+                                        : isLiked
+                                        ? 'Liked'
+                                        : 'Like'}
                                 </Button>
                                 <Button
                                     size="lg"
