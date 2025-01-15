@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { IImagePreview } from '@/interfaces/image';
 import ImageLightbox from './ImageLightbox';
+import { downloadImage } from '@/utils/download';
 
 interface ImageDetailsProps {
     image: IImagePreview;
@@ -28,6 +29,19 @@ interface ImageDetailsProps {
 export default function ImageDetails({ image }: ImageDetailsProps) {
     const router = useRouter();
     const [showLightbox, setShowLightbox] = useState(false);
+    const [isDownloading, setIsDownloading] = useState(false);
+
+    const handleDownload = async () => {
+        try {
+            setIsDownloading(true);
+            const filename = `${image.alt_description || 'unsplash-image'}.jpg`;
+            await downloadImage(image.urls.full, filename);
+        } catch (error) {
+            console.error('Download failed:', error);
+        } finally {
+            setIsDownloading(false);
+        }
+    };
 
     return (
         <motion.div
@@ -165,10 +179,14 @@ export default function ImageDetails({ image }: ImageDetailsProps) {
                                 </Button>
                                 <Button
                                     size="lg"
-                                    className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                                    className="flex-1 bg-green-600 hover:bg-green-700 text-white disabled:opacity-50"
+                                    onClick={handleDownload}
+                                    disabled={isDownloading}
                                 >
                                     <Download className="h-5 w-5 mr-2" />
-                                    Download
+                                    {isDownloading
+                                        ? 'Downloading...'
+                                        : 'Download'}
                                 </Button>
                             </div>
                         </div>

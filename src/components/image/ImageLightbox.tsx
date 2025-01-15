@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { X, ZoomIn, ZoomOut } from 'lucide-react';
+import { X, ZoomIn, ZoomOut, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { downloadImage } from '@/utils/download';
 
 interface ImageLightboxProps {
     src: string;
@@ -18,6 +19,7 @@ export default function ImageLightbox({
     onClose,
 }: ImageLightboxProps) {
     const [scale, setScale] = useState(1);
+    const [isDownloading, setIsDownloading] = useState(false);
 
     const handleZoomIn = () => setScale((prev) => Math.min(prev + 0.5, 3));
     const handleZoomOut = () => setScale((prev) => Math.max(prev - 0.5, 0.5));
@@ -33,6 +35,19 @@ export default function ImageLightbox({
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [onClose]);
 
+    const handleDownload = async (e: React.MouseEvent) => {
+        try {
+            e.stopPropagation();
+            setIsDownloading(true);
+            const filename = `${alt || 'unsplash-image'}.jpg`;
+            await downloadImage(src, filename);
+        } catch (error) {
+            console.error('Download failed:', error);
+        } finally {
+            setIsDownloading(false);
+        }
+    };
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -42,6 +57,15 @@ export default function ImageLightbox({
             onClick={onClose}
         >
             <div className="absolute top-4 right-4 flex gap-2 z-[60] p-2 rounded-lg bg-black/60 backdrop-blur-sm">
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-white hover:bg-white/20 shadow-lg disabled:opacity-50"
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                >
+                    <Download className="h-6 w-6" />
+                </Button>
                 <Button
                     variant="ghost"
                     size="icon"
