@@ -26,7 +26,7 @@ export default async function ProfilePage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
+        <section className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
             <div className="container mx-auto px-4 py-8">
                 <ProfileHeader user={session.user} />
                 <div className="container mx-auto px-4 py-8">
@@ -77,6 +77,6 @@ export default async function ProfilePage() {
                     )}
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

@@ -1,7 +1,22 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import LoginForm from '@/components/forms/LoginForm';
+import ShowMessage from '@/components/ShowMessage';
 
-export default function LoginPage() {
+export const metadata: Metadata = {
+    title: 'Login | FrameFlow - Explore images in a seamless flow.',
+    description: 'Sign in to your FrameFlow account.',
+};
+
+type SearchParams = Promise<{ message?: string }>;
+
+interface LoginPageProps {
+    searchParams: SearchParams;
+}
+
+export default async function LoginPage({ searchParams }: LoginPageProps) {
+    const { message } = await searchParams;
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
             <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-2xl w-full max-w-md">
@@ -28,6 +43,7 @@ export default function LoginPage() {
                     </p>
                 </div>
             </div>
+            {message && <ShowMessage message={message} />}
         </div>
     );
 }
