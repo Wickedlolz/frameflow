@@ -3,6 +3,7 @@
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { IImagePreview } from '@/interfaces/image';
+import { revalidatePath } from 'next/cache';
 
 export async function toggleLikeImage(image: IImagePreview) {
     try {
@@ -43,6 +44,9 @@ export async function toggleLikeImage(image: IImagePreview) {
             });
 
             if (error) throw error;
+
+            revalidatePath('/profile');
+
             return { liked: true };
         }
     } catch (error) {
