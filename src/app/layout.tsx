@@ -20,6 +20,14 @@ export const metadata: Metadata = {
     title: 'FrameFlow - Explore images in a seamless flow.',
     description:
         'FrameFlow: Discover and explore high-quality images from Unsplash. Browse curated collections, search for specific themes, and find inspiration for your projects with our responsive, user-friendly interface.',
+    icons: {
+        icon: [
+            {
+                url: '/favicon.svg',
+                type: 'image/svg+xml',
+            },
+        ],
+    },
 };
 
 export default function RootLayout({
