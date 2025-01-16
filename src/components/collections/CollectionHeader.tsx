@@ -17,7 +17,6 @@ export default function CollectionHeader({
     collection,
 }: CollectionHeaderProps) {
     const router = useRouter();
-    console.log('collection', collection);
 
     return (
         <motion.div
