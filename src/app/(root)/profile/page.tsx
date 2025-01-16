@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { getLikedImages } from '@/actions/liked-images.action';
 
 import ProfileHeader from '@/components/profile/ProfileHeader';
