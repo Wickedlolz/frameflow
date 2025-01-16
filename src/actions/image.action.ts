@@ -127,3 +127,18 @@ export async function fetchPaginatedCollections(
         ? (data as unknown as CollectionResponse).results
         : (data as ICollection[]);
 }
+
+export async function getCollectionById(id: string) {
+    return requester<ICollection>(`/collections/${id}`);
+}
+
+export async function getCollectionPhotosById(
+    id: string,
+    page?: number,
+    perPage?: number
+) {
+    return requester<IImage[]>(`/collections/${id}/photos`, {
+        page,
+        perPage,
+    });
+}

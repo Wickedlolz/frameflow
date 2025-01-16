@@ -1,5 +1,7 @@
+import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { fetchPhotos } from '@/actions/image.action';
+
 import ExploreHero from '@/components/explore/ExploreHero';
 import ExploreFilters from '@/components/explore/ExploreFilters';
 import ExploreImageGrid from '@/components/explore/ExploreImageGrid';
@@ -11,6 +13,10 @@ type SearchParams = Promise<{
     orderBy?: string;
     page?: number;
 }>;
+
+export const metadata: Metadata = {
+    title: 'Explore | FrameFlow - Explore images in a seamless flow.',
+};
 
 export default async function ExplorePage({
     searchParams,

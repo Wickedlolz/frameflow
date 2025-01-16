@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { fetchCollections } from '@/actions/image.action';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -7,6 +8,10 @@ import CollectionsGrid from '@/components/collections/CollectionsGrid';
 interface CollectionsPageProps {
     searchParams: { q?: string };
 }
+
+export const metadata: Metadata = {
+    title: 'Collections | FrameFlow - Explore images in a seamless flow.',
+};
 
 export default async function CollectionsPage({
     searchParams,

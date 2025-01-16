@@ -63,6 +63,7 @@ export async function getLikedImages() {
         const { data, error } = await supabase
             .from('liked_images')
             .select('*')
+            .eq('user_id', user.id)
             .order('created_at', { ascending: false });
 
         if (error) throw error;
