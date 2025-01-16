@@ -11,8 +11,9 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Menu, Moon, Sun } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import SignOutButton from './SignOutButton';
+import ThemeSwitcher from './ThemeSwitcher';
 
 export default async function Header() {
     const supabase = createServerComponentClient({ cookies });
@@ -20,11 +21,6 @@ export default async function Header() {
     const {
         data: { session },
     } = await supabase.auth.getSession();
-    const isDarkMode = false;
-    // const toggleTheme = () => {
-    //     setIsDarkMode(!isDarkMode);
-    //     // Add logic here to actually change the theme
-    // };
 
     return (
         <header className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-lg">
@@ -71,18 +67,7 @@ export default async function Header() {
 
                     {/* User Section */}
                     <div className="flex items-center space-x-4">
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            className="rounded-full text-white hover:text-gray-200 hover:bg-white/10"
-                            // onClick={toggleTheme}
-                        >
-                            {isDarkMode ? (
-                                <Sun size={20} />
-                            ) : (
-                                <Moon size={20} />
-                            )}
-                        </Button>
+                        <ThemeSwitcher />
 
                         {!session ? (
                             <div className="flex items-center space-x-4">
@@ -97,7 +82,11 @@ export default async function Header() {
                                 <Button
                                     variant="outline"
                                     size="sm"
-                                    className="border-white text-black hover:bg-white hover:text-purple-600"
+                                    className="border-white bg-white/10 text-white 
+                                        hover:bg-white/20 hover:text-white hover:border-white/80
+                                        dark:border-white/80 dark:bg-white/10 dark:text-white 
+                                        dark:hover:bg-white/20 dark:hover:text-white dark:hover:border-white/60 
+                                        backdrop-blur-sm transition-all duration-300"
                                     asChild
                                 >
                                     <Link href="/signup">Sign Up</Link>
