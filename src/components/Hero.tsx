@@ -1,7 +1,5 @@
 import SearchForm from './forms/SearchForm';
-import { Button } from '@/components/ui/button';
-
-const categories = ['Popular', 'Nature', 'Architecture', 'Travel'];
+import PopularSearch from './PopularSearch';
 
 export default function Hero() {
     return (
@@ -16,17 +14,7 @@ export default function Hero() {
                     projects.
                 </p>
                 <SearchForm />
-                <div className="mt-12 flex flex-wrap justify-center gap-4">
-                    {categories.map((category) => (
-                        <Button
-                            key={category}
-                            variant="outline"
-                            className="rounded-full border-white bg-white/10 text-white hover:bg-white hover:text-purple-600 dark:border-white/80 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white dark:hover:text-purple-600 backdrop-blur-sm transition-all duration-300"
-                        >
-                            {category}
-                        </Button>
-                    ))}
-                </div>
+                <PopularSearch />
             </div>
         </section>
     );

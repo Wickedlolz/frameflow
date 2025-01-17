@@ -36,7 +36,7 @@ export default function ExploreHero({ initialQuery = '' }) {
                             placeholder="Search high-resolution photos"
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
-                            className="pl-10 h-10 bg-white/95 border-0 ring-2 ring-white/20 focus:ring-white"
+                            className="pl-10 h-10 bg-white/95 dark:text-black border-0 ring-2 ring-white/20 focus:ring-white"
                         />
                     </div>
                     <Button
