@@ -21,6 +21,10 @@ import { signUp } from '@/actions/auth';
 
 const signUpSchema = z
     .object({
+        name: z
+            .string()
+            .min(2, 'Name must be at least 2 characters')
+            .max(50, 'Name must be less than 50 characters'),
         email: z.string().email('Invalid email address'),
         password: z
             .string()
@@ -45,6 +49,7 @@ export default function SignUpForm() {
     const form = useForm<SignUpFormValues>({
         resolver: zodResolver(signUpSchema),
         defaultValues: {
+            name: '',
             email: '',
             password: '',
             confirmPassword: '',
@@ -56,7 +61,8 @@ export default function SignUpForm() {
             setError(null);
             const { error: signUpError } = await signUp(
                 values.email,
-                values.password
+                values.password,
+                values.name
             );
 
             if (signUpError) throw signUpError;
@@ -72,6 +78,24 @@ export default function SignUpForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                                <Input
+                                    {...field}
+                                    placeholder="John Doe"
+                                    autoComplete="name"
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
                 <FormField
                     control={form.control}
                     name="email"

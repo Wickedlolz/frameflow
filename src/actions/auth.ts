@@ -26,12 +26,17 @@ export async function signOut() {
     redirect('/login');
 }
 
-export async function signUp(email: string, password: string) {
+export async function signUp(email: string, password: string, name: string) {
     const supabase = await createClient();
 
-    const { error: authError } = await supabase.auth.signUp({
+    const { error: authError, data } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+            data: {
+                full_name: name,
+            },
+        },
     });
 
     if (authError) {
@@ -39,45 +44,62 @@ export async function signUp(email: string, password: string) {
     }
 
     // Create profile in profiles table
-    // const { error: profileError } = await supabase.from('profiles').insert([
-    //     {
-    //         id: user?.id,
-    //         name,
-    //         email,
-    //     },
-    // ]);
+    const { error: profileError } = await supabase.from('profiles').insert([
+        {
+            id: data.user?.id,
+            name,
+            email,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+        },
+    ]);
 
-    // if (profileError) {
-    //     return { error: profileError.message };
-    // }
+    if (profileError) {
+        return { error: profileError.message };
+    }
 
-    redirect('/');
+    return { data };
 }
 
 export async function updateProfile(formData: FormData) {
     const supabase = await createClient();
     const {
-        data: { session },
-    } = await supabase.auth.getSession();
+        data: { user },
+    } = await supabase.auth.getUser();
 
-    if (!session) {
+    if (!user) {
         return { error: 'Not authenticated' };
     }
 
     const name = formData.get('name') as string;
     const bio = formData.get('bio') as string;
+    const avatar_url = formData.get('avatar_url') as string;
 
-    const { error } = await supabase
+    // Update auth metadata first
+    const { error: metadataError } = await supabase.auth.updateUser({
+        data: {
+            full_name: name,
+            avatar_url: avatar_url || null,
+        },
+    });
+
+    if (metadataError) {
+        return { error: metadataError.message };
+    }
+
+    // Then update profile
+    const { error: profileError } = await supabase
         .from('profiles')
         .update({
             name,
             bio,
+            avatar_url: avatar_url || null,
             updated_at: new Date().toISOString(),
         })
-        .eq('id', session.user.id);
+        .eq('id', user.id);
 
-    if (error) {
-        return { error: error.message };
+    if (profileError) {
+        return { error: profileError.message };
     }
 
     revalidatePath('/profile');

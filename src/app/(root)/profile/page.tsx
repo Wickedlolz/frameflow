@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { getLikedImages } from '@/actions/liked-images.action';
+import { getUserProfile } from '@/actions/profile.action';
 
 import ProfileHeader from '@/components/profile/ProfileHeader';
 import { Button } from '@/components/ui/button';
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 
 export default async function ProfilePage() {
     const likedImages = await getLikedImages();
+    const profile = await getUserProfile();
     const supabase = await createClient();
     const {
         data: { user },
@@ -27,12 +29,12 @@ export default async function ProfilePage() {
     return (
         <section className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
             <div className="container mx-auto px-4 py-8">
-                <ProfileHeader user={user} />
+                <ProfileHeader user={profile} />
                 <div className="container mx-auto px-4 py-8">
                     <div className="mb-8">
                         <Button
                             variant="ghost"
-                            className="text-blue-600 hover:text-blue-800"
+                            className="text-blue-600 hover:text-blue-800 bg-white"
                             asChild
                         >
                             <Link href="/profile">
@@ -69,7 +71,7 @@ export default async function ProfilePage() {
 
                     {likedImages.length === 0 && (
                         <div className="text-center py-12">
-                            <p className="text-gray-500 dark:text-gray-400">
+                            <p className="text-gray-800">
                                 You haven&apos;t liked any images yet.
                             </p>
                         </div>
