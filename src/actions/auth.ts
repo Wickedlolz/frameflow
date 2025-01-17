@@ -18,7 +18,7 @@ export async function login(email: string, password: string) {
         return error;
     }
 
-    redirect('/');
+    return null;
 }
 
 export async function signOut() {

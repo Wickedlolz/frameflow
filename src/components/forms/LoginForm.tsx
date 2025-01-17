@@ -47,9 +47,7 @@ export default function LoginForm() {
 
             if (error) throw error;
 
-            router.push(
-                '/login?message=Check your email to confirm your account'
-            );
+            router.replace('/');
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An error occurred');
         }
