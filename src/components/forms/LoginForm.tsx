@@ -1,24 +1,59 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { login } from '@/actions/auth';
 import { motion } from 'framer-motion';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import { TriangleAlert } from 'lucide-react';
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/components/ui/form';
 
-const initialState = { error: null as string | null };
+const signInSchema = z.object({
+    email: z.string().email('Invalid email address'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
+});
+
+type SignInFormValues = z.infer<typeof signInSchema>;
 
 export default function LoginForm() {
-    const [state, formAction, isPending] = useActionState(
-        async (prevState: typeof initialState, formData: FormData) => {
-            return login(formData);
+    const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
+
+    const form = useForm<SignInFormValues>({
+        resolver: zodResolver(signInSchema),
+        defaultValues: {
+            email: '',
+            password: '',
         },
-        initialState
-    );
+    });
+
+    const onSubmit = async (values: SignInFormValues) => {
+        try {
+            setError(null);
+            const error = await login(values.email, values.password);
+
+            if (error) throw error;
+
+            router.push(
+                '/login?message=Check your email to confirm your account'
+            );
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'An error occurred');
+        }
+    };
 
     return (
         <motion.div
@@ -26,42 +61,66 @@ export default function LoginForm() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
         >
-            <form action={formAction} className="space-y-6">
-                <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                        id="email"
-                        type="email"
-                        name="email"
-                        placeholder="you@example.com"
-                        required
-                    />
-                </div>
-                <div>
-                    <Label htmlFor="password">Password</Label>
-                    <Input
-                        id="password"
-                        type="password"
-                        name="password"
-                        placeholder="••••••••"
-                        required
-                    />
-                </div>
-                {state.error && (
-                    <Alert variant="destructive">
-                        <TriangleAlert className="h-4 w-4" />
-                        <AlertTitle>Error</AlertTitle>
-                        <AlertDescription>{state.error}</AlertDescription>
-                    </Alert>
-                )}
-                <Button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white"
-                    disabled={isPending}
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-6"
                 >
-                    {isPending ? 'Signing in...' : 'Sign in'}
-                </Button>
-            </form>
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        type="email"
+                                        placeholder="you@example.com"
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        type="password"
+                                        placeholder="••••••••"
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    {error && (
+                        <Alert variant="destructive">
+                            <TriangleAlert className="h-4 w-4" />
+                            <AlertTitle>Error</AlertTitle>
+                            <AlertDescription>{error}</AlertDescription>
+                        </Alert>
+                    )}
+
+                    <Button
+                        type="submit"
+                        className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white"
+                        disabled={form.formState.isSubmitting}
+                    >
+                        {form.formState.isSubmitting
+                            ? 'Signing in...'
+                            : 'Sign in'}
+                    </Button>
+                </form>
+            </Form>
         </motion.div>
     );
 }

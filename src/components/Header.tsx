@@ -96,7 +96,10 @@ export default async function Header() {
                                 <DropdownMenuTrigger asChild>
                                     <Avatar className="cursor-pointer">
                                         <AvatarImage
-                                            src={''}
+                                            src={
+                                                session.user?.user_metadata
+                                                    .avatar_url
+                                            }
                                             alt={session?.user?.email}
                                         />
                                         <AvatarFallback>
