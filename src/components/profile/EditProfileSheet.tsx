@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -29,6 +29,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Edit } from 'lucide-react';
 import { updateProfile } from '@/actions/auth';
+import Image from 'next/image';
 
 const profileSchema = z.object({
     name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -44,6 +45,7 @@ interface EditProfileSheetProps {
 
 export default function EditProfileSheet({ user }: EditProfileSheetProps) {
     const [open, setOpen] = useState(false);
+    const [previewUrl, setPreviewUrl] = useState(user.avatar_url || '');
     const router = useRouter();
 
     const form = useForm<ProfileFormValues>({
@@ -54,6 +56,14 @@ export default function EditProfileSheet({ user }: EditProfileSheetProps) {
             avatar_url: user.avatar_url || '',
         },
     });
+
+    const avatarUrl = form.watch('avatar_url');
+
+    useEffect(() => {
+        if (avatarUrl && avatarUrl !== previewUrl) {
+            setPreviewUrl(avatarUrl);
+        }
+    }, [avatarUrl, previewUrl]);
 
     const onSubmit = async (values: ProfileFormValues) => {
         try {
@@ -102,23 +112,49 @@ export default function EditProfileSheet({ user }: EditProfileSheetProps) {
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="space-y-6 mt-8"
                     >
-                        <FormField
-                            control={form.control}
-                            name="avatar_url"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Profile Image URL</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            {...field}
-                                            type="url"
-                                            placeholder="https://example.com/avatar.jpg"
+                        <div className="space-y-4">
+                            {previewUrl && (
+                                <div className="flex justify-center">
+                                    <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-gray-200 dark:border-gray-700">
+                                        <Image
+                                            src={previewUrl}
+                                            alt="Profile preview"
+                                            fill
+                                            className="object-cover"
+                                            onError={() => {
+                                                setPreviewUrl(
+                                                    `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                                                        form.getValues(
+                                                            'name'
+                                                        ) ||
+                                                            user.email ||
+                                                            'User'
+                                                    )}`
+                                                );
+                                            }}
                                         />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
+                                    </div>
+                                </div>
                             )}
-                        />
+
+                            <FormField
+                                control={form.control}
+                                name="avatar_url"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Profile Image URL</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                {...field}
+                                                type="url"
+                                                placeholder="https://example.com/avatar.jpg"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
 
                         <FormField
                             control={form.control}
