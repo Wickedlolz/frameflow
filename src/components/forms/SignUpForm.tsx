@@ -59,6 +59,11 @@ export default function SignUpForm() {
     const onSubmit = async (values: SignUpFormValues) => {
         try {
             setError(null);
+
+            if (values.password !== values.confirmPassword) {
+                throw new Error('Passwords do not match. Please try again.');
+            }
+
             const { error: signUpError } = await signUp(
                 values.email,
                 values.password,
