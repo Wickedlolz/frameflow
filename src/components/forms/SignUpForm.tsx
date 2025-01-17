@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -18,6 +17,7 @@ import {
     FormLabel,
     FormMessage,
 } from '@/components/ui/form';
+import { signUp } from '@/actions/auth';
 
 const signUpSchema = z
     .object({
@@ -54,10 +54,10 @@ export default function SignUpForm() {
     const onSubmit = async (values: SignUpFormValues) => {
         try {
             setError(null);
-            const { error: signUpError } = await supabase.auth.signUp({
-                email: values.email,
-                password: values.password,
-            });
+            const { error: signUpError } = await signUp(
+                values.email,
+                values.password
+            );
 
             if (signUpError) throw signUpError;
 

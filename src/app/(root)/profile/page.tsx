@@ -1,9 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@/lib/supabase/server';
 import { getLikedImages } from '@/actions/liked-images.action';
 
 import ProfileHeader from '@/components/profile/ProfileHeader';
@@ -16,19 +15,19 @@ export const metadata: Metadata = {
 
 export default async function ProfilePage() {
     const likedImages = await getLikedImages();
-    const supabase = createServerComponentClient({ cookies });
+    const supabase = await createClient();
     const {
-        data: { session },
-    } = await supabase.auth.getSession();
+        data: { user },
+    } = await supabase.auth.getUser();
 
-    if (!session) {
+    if (!user) {
         redirect('/login');
     }
 
     return (
         <section className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
             <div className="container mx-auto px-4 py-8">
-                <ProfileHeader user={session.user} />
+                <ProfileHeader user={user} />
                 <div className="container mx-auto px-4 py-8">
                     <div className="mb-8">
                         <Button

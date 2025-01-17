@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/server';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -15,11 +14,11 @@ import SignOutButton from './SignOutButton';
 import ThemeSwitcher from './ThemeSwitcher';
 
 export default async function Header() {
-    const supabase = createServerComponentClient({ cookies });
+    const supabase = await createClient();
 
     const {
-        data: { session },
-    } = await supabase.auth.getSession();
+        data: { user },
+    } = await supabase.auth.getUser();
 
     return (
         <header className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-lg">
@@ -68,7 +67,7 @@ export default async function Header() {
                     <div className="flex items-center space-x-4">
                         <ThemeSwitcher />
 
-                        {!session ? (
+                        {!user ? (
                             <div className="flex items-center space-x-4">
                                 <Button
                                     variant="ghost"
@@ -96,14 +95,11 @@ export default async function Header() {
                                 <DropdownMenuTrigger asChild>
                                     <Avatar className="cursor-pointer">
                                         <AvatarImage
-                                            src={
-                                                session.user?.user_metadata
-                                                    .avatar_url
-                                            }
-                                            alt={session?.user?.email}
+                                            src={user?.user_metadata.avatar_url}
+                                            alt={user?.email}
                                         />
                                         <AvatarFallback>
-                                            {session?.user?.email
+                                            {user?.email
                                                 ?.split('')[0]
                                                 .charAt(0)
                                                 .toLocaleUpperCase()}

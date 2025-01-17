@@ -5,8 +5,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import SearchCollections from '@/components/collections/SearchCollections';
 import CollectionsGrid from '@/components/collections/CollectionsGrid';
 
+type SearchParams = Promise<{ q?: string }>;
+
 interface CollectionsPageProps {
-    searchParams: { q?: string };
+    searchParams: SearchParams;
 }
 
 export const metadata: Metadata = {
@@ -16,8 +18,9 @@ export const metadata: Metadata = {
 export default async function CollectionsPage({
     searchParams,
 }: CollectionsPageProps) {
+    const { q } = await searchParams;
     const initialData = await fetchCollections({
-        query: searchParams.q,
+        query: q,
         perPage: 12,
     });
 
@@ -40,7 +43,7 @@ export default async function CollectionsPage({
                 <Suspense fallback={<Skeleton className="h-[600px] w-full" />}>
                     <CollectionsGrid
                         initialData={initialData}
-                        searchQuery={searchParams.q}
+                        searchQuery={q}
                     />
                 </Suspense>
             </div>

@@ -380,3 +380,12 @@ export interface IImagePreview {
         }>;
     };
 }
+
+export interface ILikedImage {
+    id: string;
+    user_id: string;
+    image_id: string;
+    image_url: string;
+    title: string;
+    description: string | null;
+}

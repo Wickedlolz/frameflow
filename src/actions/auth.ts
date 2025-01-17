@@ -1,12 +1,11 @@
 'use server';
 
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 export async function login(email: string, password: string) {
-    const supabase = createServerActionClient({ cookies });
+    const supabase = await createClient();
 
     const { error } = await supabase.auth.signInWithPassword({
         email,
@@ -22,21 +21,15 @@ export async function login(email: string, password: string) {
 }
 
 export async function signOut() {
-    const supabase = createServerActionClient({ cookies });
+    const supabase = await createClient();
     await supabase.auth.signOut();
     redirect('/login');
 }
 
-export async function signUp(formData: FormData) {
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const name = formData.get('name') as string;
-    const supabase = createServerActionClient({ cookies });
+export async function signUp(email: string, password: string) {
+    const supabase = await createClient();
 
-    const {
-        error: authError,
-        data: { user },
-    } = await supabase.auth.signUp({
+    const { error: authError } = await supabase.auth.signUp({
         email,
         password,
     });
@@ -46,23 +39,23 @@ export async function signUp(formData: FormData) {
     }
 
     // Create profile in profiles table
-    const { error: profileError } = await supabase.from('profiles').insert([
-        {
-            id: user?.id,
-            name,
-            email,
-        },
-    ]);
+    // const { error: profileError } = await supabase.from('profiles').insert([
+    //     {
+    //         id: user?.id,
+    //         name,
+    //         email,
+    //     },
+    // ]);
 
-    if (profileError) {
-        return { error: profileError.message };
-    }
+    // if (profileError) {
+    //     return { error: profileError.message };
+    // }
 
     redirect('/');
 }
 
 export async function updateProfile(formData: FormData) {
-    const supabase = createServerActionClient({ cookies });
+    const supabase = await createClient();
     const {
         data: { session },
     } = await supabase.auth.getSession();

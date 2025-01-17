@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { User } from '@supabase/auth-helpers-nextjs';
+import { User } from '@supabase/supabase-js';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Edit, Mail } from 'lucide-react';

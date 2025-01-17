@@ -1,13 +1,12 @@
 'use server';
 
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
-import { IImagePreview } from '@/interfaces/image';
+import { createClient } from '@/lib/supabase/server';
+import { IImagePreview, ILikedImage } from '@/interfaces/image';
 import { revalidatePath } from 'next/cache';
 
 export async function toggleLikeImage(image: IImagePreview) {
     try {
-        const supabase = createServerActionClient({ cookies });
+        const supabase = await createClient();
 
         // Get current user
         const {
@@ -57,7 +56,7 @@ export async function toggleLikeImage(image: IImagePreview) {
 
 export async function getLikedImages() {
     try {
-        const supabase = createServerActionClient({ cookies });
+        const supabase = await createClient();
 
         const {
             data: { user },
@@ -71,7 +70,7 @@ export async function getLikedImages() {
             .order('created_at', { ascending: false });
 
         if (error) throw error;
-        return data;
+        return data as ILikedImage[];
     } catch (error) {
         console.error('Error fetching liked images:', error);
         throw new Error('Failed to fetch liked images');
@@ -80,7 +79,7 @@ export async function getLikedImages() {
 
 export async function isImageLiked(imageId: string) {
     try {
-        const supabase = createServerActionClient({ cookies });
+        const supabase = await createClient();
 
         const {
             data: { user },
