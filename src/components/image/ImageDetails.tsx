@@ -62,11 +62,15 @@ export default function ImageDetails({
                 if (result.liked !== newLikedState) {
                     setIsLiked(result.liked); // Revert if server state differs
                 }
-                toast.success(result.liked ? 'Image liked!' : 'Image unliked!');
+                toast.success(
+                    result.liked
+                        ? `${image.slug} Saved to your collection! 🎉`
+                        : `${image.slug} Removed from your collection! 😔`
+                );
             } catch (error) {
                 console.log(error);
                 setIsLiked(!newLikedState); // Revert on error
-                toast.error('Please sign in to like images.');
+                toast.error('Please sign in to like images. 🔒');
             }
         });
     };
