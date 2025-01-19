@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -46,7 +45,6 @@ interface EditProfileSheetProps {
 export default function EditProfileSheet({ user }: EditProfileSheetProps) {
     const [open, setOpen] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(user.avatar_url || '');
-    const router = useRouter();
 
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(profileSchema),
@@ -80,7 +78,6 @@ export default function EditProfileSheet({ user }: EditProfileSheetProps) {
 
             toast.success('Profile updated successfully!');
             setOpen(false);
-            router.refresh();
         } catch (error) {
             toast.error(
                 error instanceof Error
