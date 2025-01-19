@@ -1,5 +1,7 @@
 # FrameFlow 📸
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/94a8b984-f510-4d86-b3fc-3d7029566452/deploy-status)](https://app.netlify.com/sites/frameflowx/deploys)
+
 A modern image discovery platform built with Next.js 15.1.4, enabling users to explore, collect, and interact with high-quality images through a seamless interface.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
