@@ -39,7 +39,7 @@ export default async function ProfilePage() {
                         >
                             <Link href="/profile">
                                 <ArrowLeft className="mr-2 h-4 w-4" />
-                                Back to Profile
+                                Back
                             </Link>
                         </Button>
                         <h1 className="text-3xl font-bold mt-4 text-white">
