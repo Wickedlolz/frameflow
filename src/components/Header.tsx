@@ -97,6 +97,7 @@ export default async function Header() {
                                         <AvatarImage
                                             src={user?.user_metadata.avatar_url}
                                             alt={user?.email}
+                                            className="object-cover"
                                         />
                                         <AvatarFallback>
                                             {user?.email
