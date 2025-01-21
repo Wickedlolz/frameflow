@@ -36,10 +36,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="en" suppressHydrationWarning className="overflow-x-hidden">
             <body
                 cz-shortcut-listen="true"
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen overflow-x-hidden`}
             >
                 <ThemeProvider
                     attribute="class"
@@ -47,7 +47,7 @@ export default function RootLayout({
                     enableSystem
                 >
                     <Header />
-                    <main>{children}</main>
+                    <main className="flex-grow">{children}</main>
                     <Footer />
                     <Toaster />
                 </ThemeProvider>

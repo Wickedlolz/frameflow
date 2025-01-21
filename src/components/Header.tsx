@@ -12,6 +12,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Menu } from 'lucide-react';
 import SignOutButton from './SignOutButton';
 import ThemeSwitcher from './ThemeSwitcher';
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from './ui/sheet';
 
 export default async function Header() {
     const supabase = await createClient();
@@ -19,6 +27,23 @@ export default async function Header() {
     const {
         data: { user },
     } = await supabase.auth.getUser();
+
+    const NavItems = () => (
+        <>
+            <Link href="/" className="text-white hover:text-gray-200">
+                Home
+            </Link>
+            <Link href="/explore" className="text-white hover:text-gray-200">
+                Explore
+            </Link>
+            <Link
+                href="/collections"
+                className="text-white hover:text-gray-200"
+            >
+                Collections
+            </Link>
+        </>
+    );
 
     return (
         <header className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-lg">
@@ -42,25 +67,8 @@ export default async function Header() {
                     </Link>
 
                     {/* Navigation Links - Desktop */}
-                    <nav className="hidden md:flex space-x-1">
-                        {['Home', 'Explore', 'Collections'].map((item) => (
-                            <Button
-                                key={item}
-                                variant="ghost"
-                                asChild
-                                className="text-white hover:text-gray-200 hover:bg-white/10"
-                            >
-                                <Link
-                                    href={
-                                        item === 'Home'
-                                            ? '/'
-                                            : `/${item.toLowerCase()}`
-                                    }
-                                >
-                                    {item}
-                                </Link>
-                            </Button>
-                        ))}
+                    <nav className="hidden md:flex space-x-6">
+                        <NavItems />
                     </nav>
 
                     {/* User Section */}
@@ -68,7 +76,7 @@ export default async function Header() {
                         <ThemeSwitcher />
 
                         {!user ? (
-                            <div className="flex items-center space-x-4">
+                            <div className="hidden md:flex items-center space-x-4">
                                 <Button
                                     variant="ghost"
                                     size="sm"
@@ -80,10 +88,10 @@ export default async function Header() {
                                 <Button
                                     variant="outline"
                                     size="sm"
-                                    className="border-white bg-white/10 text-white 
+                                    className="border-white bg-white/10 text-white
                                         hover:bg-white/20 hover:text-white hover:border-white/80
-                                        dark:border-white/80 dark:bg-white/10 dark:text-white 
-                                        dark:hover:bg-white/20 dark:hover:text-white dark:hover:border-white/60 
+                                        dark:border-white/80 dark:bg-white/10 dark:text-white
+                                        dark:hover:bg-white/20 dark:hover:text-white dark:hover:border-white/60
                                         backdrop-blur-sm transition-all duration-300"
                                     asChild
                                 >
@@ -124,8 +132,8 @@ export default async function Header() {
                     </div>
 
                     {/* Mobile Menu */}
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
+                    <Sheet>
+                        <SheetTrigger asChild>
                             <Button
                                 variant="ghost"
                                 size="sm"
@@ -133,23 +141,38 @@ export default async function Header() {
                             >
                                 <Menu size={24} />
                             </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-48">
-                            {['Home', 'Explore', 'Collections'].map((item) => (
-                                <DropdownMenuItem key={item} asChild>
-                                    <Link
-                                        href={
-                                            item === 'Home'
-                                                ? '/'
-                                                : `/${item.toLowerCase()}`
-                                        }
-                                    >
-                                        {item}
-                                    </Link>
-                                </DropdownMenuItem>
-                            ))}
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                        </SheetTrigger>
+                        <SheetContent
+                            side="right"
+                            className="w-[300px] sm:w-[400px]"
+                        >
+                            <SheetHeader>
+                                <SheetTitle>Menu</SheetTitle>
+                                <SheetDescription>
+                                    Navigation menu for FrameFlow
+                                </SheetDescription>
+                            </SheetHeader>
+                            <nav className="flex flex-col space-y-4 pt-5">
+                                <NavItems />
+                                {!user && (
+                                    <>
+                                        <Link
+                                            href="/login"
+                                            className="text-purple-600 hover:text-purple-700"
+                                        >
+                                            Login
+                                        </Link>
+                                        <Link
+                                            href="/signup"
+                                            className="text-purple-600 hover:text-purple-700"
+                                        >
+                                            Sign Up
+                                        </Link>
+                                    </>
+                                )}
+                            </nav>
+                        </SheetContent>
+                    </Sheet>
                 </div>
             </div>
         </header>
