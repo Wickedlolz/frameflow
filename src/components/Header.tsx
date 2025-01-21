@@ -30,15 +30,21 @@ export default async function Header() {
 
     const NavItems = () => (
         <>
-            <Link href="/" className="text-white hover:text-gray-200">
+            <Link
+                href="/"
+                className="text-black hover:text-gray-500 dark:text-white dark:hover:text-gray-400"
+            >
                 Home
             </Link>
-            <Link href="/explore" className="text-white hover:text-gray-200">
+            <Link
+                href="/explore"
+                className="text-black hover:text-gray-500 dark:text-white dark:hover:text-gray-400"
+            >
                 Explore
             </Link>
             <Link
                 href="/collections"
-                className="text-white hover:text-gray-200"
+                className="text-black hover:text-gray-500 dark:text-white dark:hover:text-gray-400"
             >
                 Collections
             </Link>
