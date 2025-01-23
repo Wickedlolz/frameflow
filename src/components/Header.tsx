@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
+import { cn } from '@/lib/utils';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -28,23 +29,35 @@ export default async function Header() {
         data: { user },
     } = await supabase.auth.getUser();
 
-    const NavItems = () => (
+    const NavItems = ({ isSideBar }: { isSideBar?: boolean }) => (
         <>
             <Link
                 href="/"
-                className="text-black hover:text-gray-500 dark:text-white dark:hover:text-gray-400"
+                className={`${cn(
+                    isSideBar
+                        ? 'text-black hover:text-gray-500 dark:text-white dark:hover:text-gray-400'
+                        : 'text-white hover:text-gray-300'
+                )}`}
             >
                 Home
             </Link>
             <Link
                 href="/explore"
-                className="text-black hover:text-gray-500 dark:text-white dark:hover:text-gray-400"
+                className={`${cn(
+                    isSideBar
+                        ? 'text-black hover:text-gray-500 dark:text-white dark:hover:text-gray-400'
+                        : 'text-white hover:text-gray-300'
+                )}`}
             >
                 Explore
             </Link>
             <Link
                 href="/collections"
-                className="text-black hover:text-gray-500 dark:text-white dark:hover:text-gray-400"
+                className={`${cn(
+                    isSideBar
+                        ? 'text-black hover:text-gray-500 dark:text-white dark:hover:text-gray-400'
+                        : 'text-white hover:text-gray-300'
+                )}`}
             >
                 Collections
             </Link>
@@ -159,7 +172,7 @@ export default async function Header() {
                                 </SheetDescription>
                             </SheetHeader>
                             <nav className="flex flex-col space-y-4 pt-5">
-                                <NavItems />
+                                <NavItems isSideBar />
                                 {!user && (
                                     <>
                                         <Link

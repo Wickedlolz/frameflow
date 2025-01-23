@@ -16,7 +16,7 @@ export default function ExploreHero({ initialQuery = '' }) {
     };
 
     return (
-        <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 py-16 px-4">
+        <article className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 py-16 px-4">
             <div className="container mx-auto max-w-4xl text-center">
                 <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
                     Explore Amazing Photos
@@ -27,27 +27,27 @@ export default function ExploreHero({ initialQuery = '' }) {
                 </p>
                 <form
                     onSubmit={handleSearch}
-                    className="flex gap-2 max-w-2xl mx-auto"
+                    className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-2 max-w-2xl mx-auto mb-8"
                 >
-                    <div className="relative flex-1">
+                    <div className="relative flex-1 w-full">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                         <Input
                             type="search"
                             placeholder="Search high-resolution photos"
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
-                            className="pl-10 h-10 bg-white/95 dark:text-black border-0 ring-2 ring-white/20 focus:ring-white"
+                            className="pl-10 pr-4 py-3 rounded-full bg-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white text-lg w-full placeholder:text-white"
                         />
                     </div>
                     <Button
                         type="submit"
                         size="lg"
-                        className="bg-white text-purple-600 hover:bg-white/90"
+                        className="w-full md:w-auto rounded-full bg-white text-purple-600 hover:bg-gray-200 px-8"
                     >
                         Search
                     </Button>
                 </form>
             </div>
-        </div>
+        </article>
     );
 }
