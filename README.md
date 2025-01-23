@@ -22,6 +22,13 @@ A modern image discovery platform built with Next.js 15.1.4, enabling users to e
 -   🌓 **Dark Mode** - Built-in dark/light theme support
 -   🔍 **Search** - Advanced search for images and collections
 
+### Contact System
+
+-   📝 Contact Form with validation
+-   💬 Dynamic FAQ section
+-   📞 Contact information display
+-   🎨 Modern gradient background
+
 ## 🛠️ Technology Stack
 
 ### Frontend
@@ -40,19 +47,33 @@ A modern image discovery platform built with Next.js 15.1.4, enabling users to e
 -   **Database**: Supabase
 -   **Image Service**: Unsplash API
 
+### UI Components
+
+-   **Contact Components**:
+    -   ContactForm: Form handling with validation
+    -   ContactHero: Hero section for contact page
+    -   ContactInfo: Display contact details
+    -   ContactFAQ: Frequently asked questions
+-   **UI Elements**:
+    -   Card components for structured content
+    -   Accordion for expandable FAQ items
+
 ## 📁 Project Structure
 
 ```
 src/
 ├── actions/          # Server actions for API calls
 ├── app/             # Next.js app router pages
+│   └── contact/     # Contact page components
 ├── components/      # Reusable React components
 │   ├── collections/ # Collection-related components
+│   ├── contact/     # Contact-specific components
+│   ├── forms/       # Form components
 │   ├── images/      # Image handling components
 │   └── auth/        # Authentication components
 ├── interfaces/      # TypeScript interfaces
-├── lib/            # Utility functions and configurations
-└── utils/          # Helper functions
+├── lib/             # Utility functions and configurations
+└── utils/           # Helper functions
 ```
 
 ## 🚀 Getting Started
