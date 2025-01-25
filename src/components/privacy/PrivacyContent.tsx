@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { privacySections } from '@/utils/constants';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
     Accordion,
@@ -8,44 +10,6 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from '@/components/ui/accordion';
-
-const privacySections = [
-    {
-        title: 'Information We Collect',
-        content:
-            'We collect information you provide directly to us, such as when you create an account, use our services, or communicate with us. This may include your name, email address, and usage data.',
-    },
-    {
-        title: 'How We Use Your Information',
-        content:
-            'We use your information to provide, maintain, and improve our services, to communicate with you, and to personalize your experience on FrameFlow.',
-    },
-    {
-        title: 'Information Sharing and Disclosure',
-        content:
-            'We do not sell your personal information. We may share your information with third-party service providers who perform services on our behalf, or when required by law.',
-    },
-    {
-        title: 'Data Security',
-        content:
-            'We implement appropriate technical and organizational measures to protect the security of your personal information against unauthorized access, disclosure, alteration, and destruction.',
-    },
-    {
-        title: 'Your Rights and Choices',
-        content:
-            'You have the right to access, correct, or delete your personal information. You can also opt out of certain data collection and use practices.',
-    },
-    {
-        title: 'Changes to This Policy',
-        content:
-            'We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page.',
-    },
-    {
-        title: 'Contact Us',
-        content:
-            'If you have any questions about this privacy policy, please contact us at privacy@frameflow.com.',
-    },
-];
 
 export default function PrivacyContent() {
     return (

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { helpCategories } from '@/utils/constants';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -14,89 +15,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, ChevronRight } from 'lucide-react';
-
-const helpCategories = [
-    {
-        title: 'Getting Started',
-        items: [
-            {
-                title: 'Creating an account',
-                content:
-                    'Learn how to create your FrameFlow account and set up your profile.',
-            },
-            {
-                title: 'Navigating the platform',
-                content:
-                    "Discover how to use FrameFlow's interface and find your way around.",
-            },
-            {
-                title: 'Basic search techniques',
-                content:
-                    'Master the art of finding the perfect images using our search functionality.',
-            },
-        ],
-    },
-    {
-        title: 'Using FrameFlow',
-        items: [
-            {
-                title: 'Saving and organizing images',
-                content:
-                    'Learn how to save your favorite images and create collections.',
-            },
-            {
-                title: 'Downloading images',
-                content:
-                    'Understand the process of downloading images and the associated rights.',
-            },
-            {
-                title: 'Sharing images and collections',
-                content:
-                    'Discover how to share your curated collections with others.',
-            },
-        ],
-    },
-    {
-        title: 'Account Management',
-        items: [
-            {
-                title: 'Updating your profile',
-                content:
-                    'Keep your profile information up-to-date and personalized.',
-            },
-            {
-                title: 'Password and security',
-                content:
-                    'Learn how to change your password and keep your account secure.',
-            },
-            {
-                title: 'Deleting your account',
-                content:
-                    'Understand the process and implications of deleting your FrameFlow account.',
-            },
-        ],
-    },
-    {
-        title: 'Troubleshooting',
-        items: [
-            {
-                title: 'Common issues',
-                content:
-                    'Find solutions to frequently encountered problems on FrameFlow.',
-            },
-            {
-                title: 'Reporting bugs',
-                content:
-                    'Learn how to report bugs and help improve the FrameFlow experience.',
-            },
-            {
-                title: 'Contacting support',
-                content:
-                    'Get in touch with our support team for personalized assistance.',
-            },
-        ],
-    },
-];
 
 export default function HelpCenterContent() {
     const [searchTerm, setSearchTerm] = useState('');
