@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { getTestimonials } from '@/actions/testimonials.action';
+
 import FeedbackHero from '@/components/feedback/FeedbackHero';
 import FeedbackContent from '@/components/feedback/FeedbackContent';
 
@@ -8,11 +10,13 @@ export const metadata: Metadata = {
         'Share your thoughts and experiences with FrameFlow. Help us improve and shape the future of our platform.',
 };
 
-export default function FeedbackPage() {
+export default async function FeedbackPage() {
+    const testimonials = await getTestimonials();
+
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white">
             <FeedbackHero />
-            <FeedbackContent />
+            <FeedbackContent testimonials={testimonials} />
         </div>
     );
 }

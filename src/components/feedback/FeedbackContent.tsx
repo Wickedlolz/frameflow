@@ -2,54 +2,52 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { createNewTestimonial } from '@/actions/testimonials.action';
+import { toast } from 'sonner';
+import { ITestimonial } from '@/interfaces/testimonials';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
 import { Star } from 'lucide-react';
 
-const testimonials = [
-    {
-        name: 'Sarah Johnson',
-        role: 'Graphic Designer',
-        content:
-            'FrameFlow has revolutionized the way I find inspiration for my projects. The vast collection of high-quality images and intuitive interface make it a joy to use.',
-        rating: 5,
-    },
-    {
-        name: 'Michael Chen',
-        role: 'Marketing Manager',
-        content:
-            "As a marketing professional, I rely on FrameFlow daily. It's an invaluable resource for finding the perfect visuals to complement our campaigns.",
-        rating: 4,
-    },
-    {
-        name: 'Emily Rodriguez',
-        role: 'Freelance Photographer',
-        content:
-            "I love how FrameFlow supports the photography community. It's not just about finding images, but also about connecting with other creatives and gaining exposure for my work.",
-        rating: 5,
-    },
-];
+type FeedbackContentProps = {
+    testimonials: ITestimonial[];
+};
 
-export default function FeedbackContent() {
+export default function FeedbackContent({
+    testimonials,
+}: FeedbackContentProps) {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [feedback, setFeedback] = useState<string>('');
     const [rating, setRating] = useState<number>(0);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Here you would typically send the feedback data to your backend
-        console.log({ name, email, feedback, rating });
-        toast.success(
-            'Feedback Submitted. Thank you for your feedback! We appreciate your input.'
-        );
-        setName('');
-        setEmail('');
-        setFeedback('');
-        setRating(0);
+
+        try {
+            await createNewTestimonial({
+                name,
+                email,
+                feedback_text: feedback,
+                rating,
+            });
+            console.log({ name, email, feedback, rating });
+            toast.success(
+                'Feedback Submitted. Thank you for your feedback! We appreciate your input.'
+            );
+            setName('');
+            setEmail('');
+            setFeedback('');
+            setRating(0);
+        } catch (error) {
+            console.error('Error submitting feedback:', error);
+            toast.error(
+                'There was a problem submitting your feedback. Please try again.'
+            );
+        }
     };
 
     return (
@@ -186,7 +184,9 @@ export default function FeedbackContent() {
                                                 <CardContent className="p-4">
                                                     <p className="mb-2 italic">
                                                         &quot;
-                                                        {testimonial.content}
+                                                        {
+                                                            testimonial.feedback_text
+                                                        }
                                                         &quot;
                                                     </p>
                                                     <div className="flex justify-between items-center">
@@ -196,11 +196,11 @@ export default function FeedbackContent() {
                                                                     testimonial.name
                                                                 }
                                                             </p>
-                                                            <p className="text-sm text-white/70">
+                                                            {/* <p className="text-sm text-white/70">
                                                                 {
                                                                     testimonial.role
                                                                 }
-                                                            </p>
+                                                            </p> */}
                                                         </div>
                                                         <div className="flex">
                                                             {[...Array(5)].map(
