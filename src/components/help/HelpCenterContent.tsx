@@ -130,13 +130,13 @@ export default function HelpCenterContent() {
                 <Card className="bg-white/10 backdrop-blur-lg border-none text-white mb-8">
                     <CardContent className="pt-6">
                         <div className="relative">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-100" />
                             <Input
                                 type="text"
                                 placeholder="Search for help..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="pl-10 bg-white/5 border-white/10 text-white placeholder-gray-400"
+                                className="pl-10 bg-white/5 border-white/10 text-white placeholder-gray-400 placeholder:text-slate-300"
                             />
                         </div>
                     </CardContent>

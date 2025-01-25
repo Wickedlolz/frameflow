@@ -50,7 +50,7 @@ export default function ContactForm() {
                                 id="name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                className="bg-white/5 border-white/10 text-white placeholder-white/50"
+                                className="bg-white/5 border-white/10 text-white placeholder-white/50 placeholder:text-slate-300"
                                 placeholder="Your name"
                                 required
                             />
@@ -67,7 +67,7 @@ export default function ContactForm() {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="bg-white/5 border-white/10 text-white placeholder-white/50"
+                                className="bg-white/5 border-white/10 text-white placeholder-white/50 placeholder:text-slate-300"
                                 placeholder="your@email.com"
                                 required
                             />
@@ -83,7 +83,7 @@ export default function ContactForm() {
                                 id="message"
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                className="bg-white/5 border-white/10 text-white placeholder-white/50"
+                                className="bg-white/5 border-white/10 text-white placeholder-white/50 placeholder:text-slate-300"
                                 placeholder="Your message here..."
                                 rows={4}
                                 required
