@@ -1,11 +1,13 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { ImageCard } from '@/components/ImageCard';
 import { getCollectionPhotosById } from '@/actions/image.action';
 import { IImage } from '@/interfaces/image';
+
+import { Button } from '@/components/ui/button';
+import { ImageCard } from '@/components/ImageCard';
 
 interface CollectionPhotosProps {
     id: string;
@@ -27,29 +29,71 @@ export default function CollectionPhotos({
             initialData: { pages: [initialPhotos], pageParams: [1] },
             initialPageParam: 1,
         });
+    const [columns, setColumns] = useState<number>(4);
 
     const allPhotos = data?.pages.flat() ?? [];
 
+    useEffect(() => {
+        const updateColumns = () => {
+            if (window.innerWidth < 640) {
+                setColumns(1);
+            } else if (window.innerWidth < 768) {
+                setColumns(2);
+            } else if (window.innerWidth < 1024) {
+                setColumns(3);
+            } else {
+                setColumns(4);
+            }
+        };
+
+        updateColumns();
+        window.addEventListener('resize', updateColumns);
+        return () => window.removeEventListener('resize', updateColumns);
+    }, []);
+
+    const distributeImages = () => {
+        const cols: IImage[][] = Array.from({ length: columns }, () => []);
+        allPhotos.forEach((image, index) => {
+            cols[index % columns].push(image);
+        });
+        return cols;
+    };
+
     return (
         <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+            className="flex flex-wrap -mx-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            {allPhotos.map((photo, index) => (
-                <motion.div
-                    key={`${photo.id}-${index}`}
-                    className="group relative overflow-hidden rounded-lg shadow-lg bg-white dark:bg-gray-800"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                        duration: 0.5,
-                        delay: index * 0.1,
-                    }}
+            {distributeImages().map((column, columnIndex) => (
+                <div
+                    key={columnIndex}
+                    className={`w-full px-2 ${
+                        columns === 1
+                            ? 'sm:w-full'
+                            : columns === 2
+                            ? 'sm:w-1/2'
+                            : columns === 3
+                            ? 'sm:w-1/2 md:w-1/3'
+                            : 'sm:w-1/2 md:w-1/3 lg:w-1/4'
+                    }`}
                 >
-                    <ImageCard image={photo} />
-                </motion.div>
+                    {column.map((image, imageIndex) => (
+                        <motion.div
+                            key={`${image.id}-${imageIndex}`}
+                            className="mb-4"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                                duration: 0.5,
+                                delay: imageIndex * 0.1,
+                            }}
+                        >
+                            <ImageCard image={image} />
+                        </motion.div>
+                    ))}
+                </div>
             ))}
 
             {hasNextPage && (
