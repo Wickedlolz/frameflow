@@ -5,6 +5,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import { IImagePreview } from '@/interfaces/image';
+import { downloadImage } from '@/utils/download';
+import { toggleLikeImage } from '@/actions/liked-images.action';
+import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -18,12 +24,7 @@ import {
     Camera,
     ZoomIn,
 } from 'lucide-react';
-import { IImagePreview } from '@/interfaces/image';
 import ImageLightbox from './ImageLightbox';
-import { downloadImage } from '@/utils/download';
-import { toggleLikeImage } from '@/actions/liked-images.action';
-import { toast } from 'sonner';
-import { cn } from '@/lib/utils';
 
 interface ImageDetailsProps {
     image: IImagePreview;
@@ -87,7 +88,7 @@ export default function ImageDetails({
                 onClick={() => router.back()}
             >
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to search
+                Back
             </Button>
 
             <Card className="overflow-hidden rounded-xl shadow-2xl mb-12">
@@ -98,6 +99,7 @@ export default function ImageDetails({
                                 src={image.urls.regular}
                                 alt={image.alt_description || 'Image'}
                                 fill
+                                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                 className="object-cover cursor-zoom-in"
                                 onClick={() => setShowLightbox(true)}
                             />
