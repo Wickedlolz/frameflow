@@ -23,6 +23,7 @@ export async function login(email: string, password: string) {
 export async function signOut() {
     const supabase = await createClient();
     await supabase.auth.signOut();
+    revalidatePath('/');
     redirect('/login');
 }
 
@@ -36,6 +37,7 @@ export async function signUp(email: string, password: string, name: string) {
             data: {
                 full_name: name,
             },
+            emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
         },
     });
 
@@ -44,19 +46,13 @@ export async function signUp(email: string, password: string, name: string) {
     }
 
     // Create profile in profiles table
-    const { error: profileError } = await supabase.from('profiles').insert([
+    await supabase.from('profiles').insert([
         {
             id: data.user?.id,
             name,
             email,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
         },
     ]);
-
-    if (profileError) {
-        return { error: profileError.message };
-    }
 
     return { data };
 }
