@@ -37,7 +37,7 @@ export default async function ProfilePage() {
                             className="text-blue-600 hover:text-blue-800 bg-white"
                             asChild
                         >
-                            <Link href="/profile">
+                            <Link href="/">
                                 <ArrowLeft className="mr-2 h-4 w-4" />
                                 Back
                             </Link>
