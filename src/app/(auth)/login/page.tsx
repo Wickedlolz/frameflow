@@ -42,6 +42,11 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                             Sign up
                         </Link>
                     </p>
+                    {message && (
+                        <div className="text-foreground border-l-2 border-l-slate-600 px-4">
+                            {message}
+                        </div>
+                    )}
                 </div>
             </div>
             {message && <ShowMessage message={message} />}
