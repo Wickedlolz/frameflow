@@ -97,7 +97,7 @@ export default function CollectionPhotos({
             ))}
 
             {hasNextPage && (
-                <div className="col-span-full mt-8 flex justify-center">
+                <div className="mt-8 flex justify-center mx-auto">
                     <Button
                         onClick={() => fetchNextPage()}
                         disabled={isFetchingNextPage}
