@@ -45,7 +45,7 @@ export default function ImageDetails({
         try {
             setIsDownloading(true);
             const filename = `${image.alt_description || 'unsplash-image'}.jpg`;
-            await downloadImage(image.urls.full, filename);
+            await downloadImage(image.links.download_location, filename);
         } catch (error) {
             console.error('Download failed:', error);
         } finally {
@@ -97,7 +97,7 @@ export default function ImageDetails({
                         <div className="relative aspect-square md:aspect-auto group">
                             <Image
                                 src={image.urls.regular}
-                                alt={image.alt_description || 'Image'}
+                                alt={image.alt_description || 'Unsplash Image'}
                                 fill
                                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                 className="object-cover cursor-zoom-in"
@@ -131,7 +131,7 @@ export default function ImageDetails({
                                     />
                                     <div>
                                         <Link
-                                            href={image.user.links.html}
+                                            href={`${image.user.links.html}?utm_source=frameflow&utm_medium=referral`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-blue-600 hover:underline dark:text-blue-400"
@@ -240,6 +240,26 @@ export default function ImageDetails({
                                         : 'Download'}
                                 </Button>
                             </div>
+                            <div className="text-sm text-gray-500 mt-3">
+                                Photo by{' '}
+                                <a
+                                    href={`${image.user.links.html}?utm_source=frameflow&utm_medium=referral`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 hover:underline"
+                                >
+                                    {image.user.name}
+                                </a>{' '}
+                                on{' '}
+                                <a
+                                    href="https://unsplash.com/?utm_source=frameflow&utm_medium=referral"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 hover:underline"
+                                >
+                                    Unsplash
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </CardContent>
@@ -249,7 +269,7 @@ export default function ImageDetails({
                 {showLightbox && (
                     <ImageLightbox
                         src={image.urls.full}
-                        alt={image.alt_description || 'Image'}
+                        alt={image.alt_description || 'Unsplash Image'}
                         onClose={() => setShowLightbox(false)}
                     />
                 )}
