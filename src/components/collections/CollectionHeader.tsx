@@ -63,7 +63,7 @@ export default function CollectionHeader({
                                 />
                                 <div>
                                     <Link
-                                        href={collection.user.links.html}
+                                        href={`${collection.user.links.html}?utm_source=frameflow&utm_medium=referral`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-blue-600 hover:underline dark:text-blue-400"
@@ -90,6 +90,26 @@ export default function CollectionHeader({
                                         {collection.total_photos} Contributors
                                     </span>
                                 </div>
+                            </div>
+                            <div className="text-sm text-gray-500 mt-3">
+                                Collection by{' '}
+                                <a
+                                    href={`${collection.user.links.html}?utm_source=frameflow&utm_medium=referral`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 hover:underline"
+                                >
+                                    {collection.user.name}
+                                </a>{' '}
+                                on{' '}
+                                <a
+                                    href="https://unsplash.com/?utm_source=frameflow&utm_medium=referral"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 hover:underline"
+                                >
+                                    Unsplash
+                                </a>
                             </div>
                         </div>
                     </div>
