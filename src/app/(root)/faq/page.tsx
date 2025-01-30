@@ -3,9 +3,9 @@ import FAQHero from '@/components/faq/FAQHero';
 import FAQContent from '@/components/faq/FAQContent';
 
 export const metadata: Metadata = {
-    title: 'FAQ | FrameFlow - Explore images in a seamless flow.',
+    title: 'FAQ | FrameFlowX - Explore images in a seamless flow.',
     description:
-        'Find answers to frequently asked questions about FrameFlow, our image discovery platform.',
+        'Find answers to frequently asked questions about FrameFlowX, our image discovery platform.',
 };
 
 export default function FAQPage() {

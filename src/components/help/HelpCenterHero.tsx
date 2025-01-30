@@ -20,7 +20,7 @@ export default function HelpCenterHero() {
                 transition={{ duration: 0.5, delay: 0.2 }}
             >
                 Find answers, get support, and learn how to make the most of
-                FrameFlow.
+                FrameFlowX.
             </motion.p>
         </section>
     );

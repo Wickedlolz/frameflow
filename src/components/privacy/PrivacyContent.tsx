@@ -36,7 +36,7 @@ export default function PrivacyContent() {
                             })}
                         </p>
                         <p className="mb-6">
-                            At FrameFlow, we are committed to protecting your
+                            At FrameFlowX, we are committed to protecting your
                             privacy and ensuring the security of your personal
                             information. This Privacy Policy explains how we
                             collect, use, and safeguard your data when you use

@@ -12,7 +12,7 @@ interface CollectionsPageProps {
 }
 
 export const metadata: Metadata = {
-    title: 'Collections | FrameFlow - Explore images in a seamless flow.',
+    title: 'Collections | FrameFlowX - Explore images in a seamless flow.',
 };
 
 export default async function CollectionsPage({

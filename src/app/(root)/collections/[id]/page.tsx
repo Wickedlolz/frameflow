@@ -10,6 +10,8 @@ import CollectionPhotos from '@/components/collections/CollectionPhotos';
 
 type Params = Promise<{ id: string }>;
 
+//TODO: add title to metadata
+
 interface CollectionPageProps {
     params: Params;
 }

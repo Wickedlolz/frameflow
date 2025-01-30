@@ -83,6 +83,9 @@ export default async function Header() {
                         <span className="text-2xl font-bold text-white tracking-wide group-hover:text-gray-200 transition-colors duration-300">
                             rame<span className="text-purple-300">Flow</span>
                         </span>
+                        <span className="bg-gradient-to-r from-pink-200 via-pink-300 to-pink-400 bg-clip-text text-transparent text-3xl font-extrabold inline-block">
+                            X
+                        </span>
                     </Link>
 
                     {/* Navigation Links - Desktop */}
@@ -168,7 +171,7 @@ export default async function Header() {
                             <SheetHeader>
                                 <SheetTitle>Menu</SheetTitle>
                                 <SheetDescription>
-                                    Navigation menu for FrameFlow
+                                    Navigation menu for FrameFlowX
                                 </SheetDescription>
                             </SheetHeader>
                             <nav className="flex flex-col space-y-4 pt-5">

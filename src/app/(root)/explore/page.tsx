@@ -15,7 +15,7 @@ type SearchParams = Promise<{
 }>;
 
 export const metadata: Metadata = {
-    title: 'Explore | FrameFlow - Explore images in a seamless flow.',
+    title: 'Explore | FrameFlowX - Explore images in a seamless flow.',
 };
 
 export default async function ExplorePage({

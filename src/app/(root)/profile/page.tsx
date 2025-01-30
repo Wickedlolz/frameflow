@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Profile | FrameFlow - Explore images in a seamless flow.',
+    title: 'Profile | FrameFlowX - Explore images in a seamless flow.',
 };
 
 export default async function ProfilePage() {

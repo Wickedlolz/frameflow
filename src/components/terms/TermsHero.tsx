@@ -19,7 +19,7 @@ export default function TermsHero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
             >
-                Please read these terms carefully before using FrameFlow.
+                Please read these terms carefully before using FrameFlowX.
             </motion.p>
         </section>
     );

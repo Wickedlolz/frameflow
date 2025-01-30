@@ -12,7 +12,7 @@ export default function OurMission() {
                     </CardHeader>
                     <CardContent>
                         <p className="text-lg text-center">
-                            At FrameFlow, we&apos;re on a mission to simplify
+                            At FrameFlowX, we&apos;re on a mission to simplify
                             the discovery and sharing of stunning imagery. We
                             leverage the vast collection of the Unsplash API to
                             connect users with high-quality, freely usable

@@ -20,7 +20,7 @@ export default function ContactInfo() {
                 <CardContent className="space-y-4">
                     <div className="flex items-center space-x-3">
                         <MapPin className="w-5 h-5" />
-                        <span>123 FrameFlow St, San Francisco, CA 94105</span>
+                        <span>123 FrameFlowX St, San Francisco, CA 94105</span>
                     </div>
                     <div className="flex items-center space-x-3">
                         <Phone className="w-5 h-5" />
@@ -28,7 +28,7 @@ export default function ContactInfo() {
                     </div>
                     <div className="flex items-center space-x-3">
                         <Mail className="w-5 h-5" />
-                        <span>support@frameflow.com</span>
+                        <span>support@frameflowx.com</span>
                     </div>
                     <div className="mt-6">
                         <h3 className="text-lg font-semibold mb-2">

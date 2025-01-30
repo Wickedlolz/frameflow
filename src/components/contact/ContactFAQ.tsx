@@ -16,19 +16,19 @@ const faqs = [
         answer: "To create an account, click on the 'Sign Up' button in the top right corner of the page. Fill in your details and follow the prompts to complete the registration process.",
     },
     {
-        question: 'Is FrameFlow free to use?',
-        answer: "Yes, FrameFlow is completely free to use. We don't have any premium plans or paid features. All of our services, including access to high-quality images from Unsplash, are provided at no cost to our users.",
+        question: 'Is FrameFlowX free to use?',
+        answer: "Yes, FrameFlowX is completely free to use. We don't have any premium plans or paid features. All of our services, including access to high-quality images from Unsplash, are provided at no cost to our users.",
     },
     {
-        question: 'Where do the images on FrameFlow come from?',
-        answer: "All images on FrameFlow are sourced from Unsplash via their API. Unsplash provides a vast collection of high-quality, freely usable images from photographers around the world. We don't own the rights to these images, but make them accessible through our platform in accordance with Unsplash's license terms.",
+        question: 'Where do the images on FrameFlowX come from?',
+        answer: "All images on FrameFlowX are sourced from Unsplash via their API. Unsplash provides a vast collection of high-quality, freely usable images from photographers around the world. We don't own the rights to these images, but make them accessible through our platform in accordance with Unsplash's license terms.",
     },
     {
         question: 'How can I report a copyright infringement?',
-        answer: 'If you believe that your copyright has been infringed, please contact our copyright team at copyright@frameflow.com with details of the infringement.',
+        answer: 'If you believe that your copyright has been infringed, please contact our copyright team at copyright@frameflowx.com with details of the infringement.',
     },
     {
-        question: 'Can I use FrameFlow images for commercial purposes?',
+        question: 'Can I use FrameFlowX images for commercial purposes?',
         answer: 'The usage rights for each image are specified on the image details page. Many images are available for commercial use, but always check the specific license for each image before using it commercially.',
     },
 ];

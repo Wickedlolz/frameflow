@@ -19,7 +19,7 @@ export default function FAQHero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
             >
-                Find answers to common questions about FrameFlow and our
+                Find answers to common questions about FrameFlowX and our
                 services.
             </motion.p>
         </section>

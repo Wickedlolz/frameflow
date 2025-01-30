@@ -35,7 +35,7 @@ export async function trackDownload(downloadLocation: string) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        return await response.json();
+        return (await response.json()) as { url: string };
     } catch (error) {
         console.error('Error tracking download:', error);
         throw error;

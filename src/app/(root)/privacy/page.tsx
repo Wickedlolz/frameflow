@@ -3,9 +3,9 @@ import PrivacyHero from '@/components/privacy/PrivacyHero';
 import PrivacyContent from '@/components/privacy/PrivacyContent';
 
 export const metadata: Metadata = {
-    title: 'Privacy Policy | FrameFlow - Explore images in a seamless flow.',
+    title: 'Privacy Policy | FrameFlowX - Explore images in a seamless flow.',
     description:
-        'Learn about how FrameFlow collects, uses, and protects your personal information.',
+        'Learn about how FrameFlowX collects, uses, and protects your personal information.',
 };
 
 export default function PrivacyPage() {

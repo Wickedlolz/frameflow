@@ -5,9 +5,9 @@ import FeedbackHero from '@/components/feedback/FeedbackHero';
 import FeedbackContent from '@/components/feedback/FeedbackContent';
 
 export const metadata: Metadata = {
-    title: 'Feedback | FrameFlow - Explore images in a seamless flow.',
+    title: 'Feedback | FrameFlowX - Explore images in a seamless flow.',
     description:
-        'Share your thoughts and experiences with FrameFlow. Help us improve and shape the future of our platform.',
+        'Share your thoughts and experiences with FrameFlowX. Help us improve and shape the future of our platform.',
 };
 
 export default async function FeedbackPage() {

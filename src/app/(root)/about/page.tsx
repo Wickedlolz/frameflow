@@ -5,9 +5,9 @@ import OurTeam from '@/components/about/AboutOurTeam';
 import OurValues from '@/components/about/AboutOurValues';
 
 export const metadata: Metadata = {
-    title: 'About Us | FrameFlow - Explore images in a seamless flow.',
+    title: 'About Us | FrameFlowX - Explore images in a seamless flow.',
     description:
-        "Learn about FrameFlow's mission, team, and values. Discover how we're revolutionizing the way people find and share stunning images.",
+        "Learn about FrameFlowX's mission, team, and values. Discover how we're revolutionizing the way people find and share stunning images.",
 };
 
 export default function AboutPage() {

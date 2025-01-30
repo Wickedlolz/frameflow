@@ -11,7 +11,7 @@ export default function AboutHero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                About FrameFlow
+                About FrameFlowX
             </motion.h1>
             <motion.p
                 className="text-xl md:text-2xl max-w-3xl mx-auto"

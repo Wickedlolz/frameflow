@@ -5,9 +5,9 @@ import ContactInfo from '@/components/contact/ContactInfo';
 import FAQ from '@/components/contact/ContactFAQ';
 
 export const metadata: Metadata = {
-    title: 'Contact Us | FrameFlow - Explore images in a seamless flow.',
+    title: 'Contact Us | FrameFlowX - Explore images in a seamless flow.',
     description:
-        "Get in touch with FrameFlow. We're here to help with any questions or feedback you may have.",
+        "Get in touch with FrameFlowX. We're here to help with any questions or feedback you may have.",
 };
 
 export default function ContactPage() {

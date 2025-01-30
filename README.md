@@ -1,4 +1,4 @@
-# FrameFlow 📸
+# FrameFlowX 📸
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/94a8b984-f510-4d86-b3fc-3d7029566452/deploy-status)](https://app.netlify.com/sites/frameflowx/deploys)
 

@@ -17,7 +17,7 @@ export default function JoinCommunity() {
                         Join Our Creative Community
                     </h2>
                     <p className="text-xl text-black/80 dark:text-white/80 mb-8 max-w-2xl mx-auto">
-                        Discover, share, and create with FrameFlow. Sign up now
+                        Discover, share, and create with FrameFlowX. Sign up now
                         to start your visual journey!
                     </p>
                     <Button

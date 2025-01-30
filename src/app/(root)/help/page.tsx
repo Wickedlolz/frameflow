@@ -3,9 +3,9 @@ import HelpCenterHero from '@/components/help/HelpCenterHero';
 import HelpCenterContent from '@/components/help/HelpCenterContent';
 
 export const metadata: Metadata = {
-    title: 'Help Center | FrameFlow - Explore images in a seamless flow.',
+    title: 'Help Center | FrameFlowX - Explore images in a seamless flow.',
     description:
-        'Get help and support for using FrameFlow, your go-to platform for discovering and sharing stunning images.',
+        'Get help and support for using FrameFlowX, your go-to platform for discovering and sharing stunning images.',
 };
 
 export default function HelpCenterPage() {

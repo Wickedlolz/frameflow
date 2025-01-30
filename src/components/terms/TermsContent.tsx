@@ -13,37 +13,37 @@ const termsSection = [
     {
         title: 'Acceptance of Terms',
         content:
-            'By accessing or using FrameFlow, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use our service.',
+            'By accessing or using FrameFlowX, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use our service.',
     },
     {
         title: 'Use of Service',
         content:
-            'FrameFlow provides a platform for discovering and sharing images sourced from Unsplash. You may use the images in accordance with the Unsplash license. You agree not to use our service for any unlawful purposes or in any way that could damage, disable, overburden, or impair our servers or networks.',
+            'FrameFlowX provides a platform for discovering and sharing images sourced from Unsplash. You may use the images in accordance with the Unsplash license. You agree not to use our service for any unlawful purposes or in any way that could damage, disable, overburden, or impair our servers or networks.',
     },
     {
         title: 'User Accounts',
         content:
-            'To access certain features of FrameFlow, you may be required to create an account. You are responsible for maintaining the confidentiality of your account and password. You agree to accept responsibility for all activities that occur under your account.',
+            'To access certain features of FrameFlowX, you may be required to create an account. You are responsible for maintaining the confidentiality of your account and password. You agree to accept responsibility for all activities that occur under your account.',
     },
     {
         title: 'Intellectual Property',
         content:
-            'The FrameFlow service and its original content, features, and functionality are owned by FrameFlow and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.',
+            'The FrameFlowX service and its original content, features, and functionality are owned by FrameFlowX and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.',
     },
     {
         title: 'Image Usage and Rights',
         content:
-            'All images available through FrameFlow are sourced from Unsplash and are subject to the Unsplash license. FrameFlow does not claim ownership of these images. Users are responsible for complying with the Unsplash license when using images obtained through our service.',
+            'All images available through FrameFlowX are sourced from Unsplash and are subject to the Unsplash license. FrameFlowX does not claim ownership of these images. Users are responsible for complying with the Unsplash license when using images obtained through our service.',
     },
     {
         title: 'Limitation of Liability',
         content:
-            'FrameFlow shall not be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the service.',
+            'FrameFlowX shall not be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the service.',
     },
     {
         title: 'Modifications to Service',
         content:
-            'FrameFlow reserves the right to modify or discontinue, temporarily or permanently, the service (or any part thereof) with or without notice. We shall not be liable to you or to any third party for any modification, price change, suspension or discontinuance of the service.',
+            'FrameFlowX reserves the right to modify or discontinue, temporarily or permanently, the service (or any part thereof) with or without notice. We shall not be liable to you or to any third party for any modification, price change, suspension or discontinuance of the service.',
     },
     {
         title: 'Governing Law',
@@ -58,7 +58,7 @@ const termsSection = [
     {
         title: 'Contact Us',
         content:
-            'If you have any questions about these Terms, please contact us at terms@frameflow.com.',
+            'If you have any questions about these Terms, please contact us at terms@frameflowx.com.',
     },
 ];
 

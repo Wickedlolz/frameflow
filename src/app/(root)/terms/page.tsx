@@ -3,9 +3,9 @@ import TermsHero from '@/components/terms/TermsHero';
 import TermsContent from '@/components/terms/TermsContent';
 
 export const metadata: Metadata = {
-    title: 'Terms of Service | FrameFlow - Explore images in a seamless flow.',
+    title: 'Terms of Service | FrameFlowX - Explore images in a seamless flow.',
     description:
-        'Read our Terms of Service to understand the rules and regulations governing the use of FrameFlow.',
+        'Read our Terms of Service to understand the rules and regulations governing the use of FrameFlowX.',
 };
 
 export default function TermsPage() {

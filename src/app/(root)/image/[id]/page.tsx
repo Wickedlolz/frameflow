@@ -20,7 +20,7 @@ export async function generateMetadata({
     const { id } = await params;
     const image = await getImageById(id);
     return {
-        title: `${image.alt_description} | FrameFlow - Explore images in a seamless flow.`,
+        title: `${image.alt_description} | FrameFlowX - Explore images in a seamless flow.`,
     };
 }
 

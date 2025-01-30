@@ -16,14 +16,17 @@ export default function Footer() {
                                 </span>
                             </div>
                             <span className="text-2xl font-bold tracking-wide">
-                                Frame
+                                rame
                                 <span className="text-purple-300">Flow</span>
+                            </span>
+                            <span className="bg-gradient-to-r from-pink-200 via-pink-300 to-pink-400 bg-clip-text text-transparent text-3xl font-extrabold inline-block">
+                                X
                             </span>
                         </Link>
                         <p className="text-sm mb-4">
                             Discover and share stunning images from around the
-                            world. FrameFlow brings you the best of photography,
-                            powered by the Unsplash API.
+                            world. FrameFlowX brings you the best of
+                            photography, powered by the Unsplash API.
                         </p>
                         <div className="flex space-x-4">
                             <a
@@ -152,7 +155,7 @@ export default function Footer() {
                 </div>
                 <div className="border-t border-white/10 py-8 flex flex-col md:flex-row justify-between items-center">
                     <p className="text-sm text-center md:text-left mb-4 md:mb-0">
-                        &copy; {new Date().getFullYear()} FrameFlow. All rights
+                        &copy; {new Date().getFullYear()} FrameFlowX. All rights
                         reserved.
                     </p>
                     <p className="text-sm text-center md:text-right">

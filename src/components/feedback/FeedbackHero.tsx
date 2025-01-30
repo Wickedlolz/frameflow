@@ -19,7 +19,7 @@ export default function FeedbackHero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
             >
-                Help us improve FrameFlow by sharing your thoughts and
+                Help us improve FrameFlowX by sharing your thoughts and
                 experiences. Your input shapes our future.
             </motion.p>
         </section>

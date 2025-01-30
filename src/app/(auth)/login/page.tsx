@@ -5,8 +5,8 @@ import LoginForm from '@/components/forms/LoginForm';
 import ShowMessage from '@/components/ShowMessage';
 
 export const metadata: Metadata = {
-    title: 'Login | FrameFlow - Explore images in a seamless flow.',
-    description: 'Sign in to your FrameFlow account.',
+    title: 'Login | FrameFlowX - Explore images in a seamless flow.',
+    description: 'Sign in to your FrameFlowX account.',
 };
 
 type SearchParams = Promise<{ message?: string }>;
@@ -23,7 +23,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-2xl w-full max-w-md">
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                        Welcome Back to FrameFlow
+                        Welcome Back to FrameFlowX
                     </h1>
                     <p className="text-gray-600 dark:text-gray-400 mt-2">
                         Sign in to your account to continue
