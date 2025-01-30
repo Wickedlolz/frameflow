@@ -270,6 +270,7 @@ export default function ImageDetails({
                     <ImageLightbox
                         src={image.urls.full}
                         alt={image.alt_description || 'Unsplash Image'}
+                        downloadLocationUrl={image.links.download_location}
                         onClose={() => setShowLightbox(false)}
                     />
                 )}

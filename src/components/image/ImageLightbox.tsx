@@ -10,12 +10,14 @@ import { downloadImage } from '@/utils/download';
 interface ImageLightboxProps {
     src: string;
     alt: string;
+    downloadLocationUrl: string;
     onClose: () => void;
 }
 
 export default function ImageLightbox({
     src,
     alt,
+    downloadLocationUrl,
     onClose,
 }: ImageLightboxProps) {
     const [scale, setScale] = useState(1);
@@ -40,7 +42,7 @@ export default function ImageLightbox({
             e.stopPropagation();
             setIsDownloading(true);
             const filename = `${alt || 'unsplash-image'}.jpg`;
-            await downloadImage(src, filename);
+            await downloadImage(downloadLocationUrl, filename);
         } catch (error) {
             console.error('Download failed:', error);
         } finally {
