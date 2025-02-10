@@ -106,7 +106,7 @@ export default function ImageDetails({
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="absolute top-4 right-4 bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                                className="absolute top-4 right-4 bg-black/50 text-white md:opacity-0 md:group-hover:opacity-100 md:transition-opacity"
                                 onClick={() => setShowLightbox(true)}
                             >
                                 <ZoomIn className="h-5 w-5" />
